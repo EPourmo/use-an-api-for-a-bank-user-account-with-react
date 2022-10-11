@@ -290,8 +290,10 @@ body {
   }
 }
 
-/* element added */
-.signIn {
+/* elements added */
+.signIn,
+.homepage,
+.userPage {
   display: flex;
   flex-direction: column;
   min-height: 100vh;

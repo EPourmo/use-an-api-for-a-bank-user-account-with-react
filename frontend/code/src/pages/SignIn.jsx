@@ -1,12 +1,12 @@
-import Header from "../src/components/Header";
-import Footer from "../src/components/Footer";
-import Background from "../src/components/Background";
-import Form from "../src/components/Form";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
+import Background from "../components/Background";
+import Form from "../components/Form";
 
 export default function SignIn() {
   return (
     <div className="signIn">
-      <Header />
+      <Header isConnected={false} />
       <Background>
         <section className="sign-in-content">
           <i className="fa fa-user-circle sign-in-icon"></i>

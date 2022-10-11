@@ -1,6 +1,6 @@
 import argentBankLogo from "../assets/argentBankLogo.png";
 
-export default function Header() {
+export default function Header({ isConnected }) {
   return (
     <nav className="main-nav">
       <a className="main-nav-logo" href="#">
@@ -14,8 +14,14 @@ export default function Header() {
       <div>
         <a className="main-nav-item" href="#">
           <i className="fa fa-user-circle"></i>
-          Sign In
+          {isConnected ? "Tony" : "Sign In"}
         </a>
+        {isConnected && (
+          <a className="main-nav-item" href="./index.html">
+            <i className="fa fa-sign-out"></i>
+            Sign Out
+          </a>
+        )}
       </div>
     </nav>
   );
