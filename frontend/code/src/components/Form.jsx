@@ -1,4 +1,5 @@
 import InputWrapper from "./InputWrapper";
+import { Link } from "react-router-dom";
 
 export default function Form() {
   const inputsData = [
@@ -36,9 +37,9 @@ export default function Form() {
         <input type="checkbox" id="remember-me" />
         <label htmlFor="remember-me">Remember me</label>
       </div>
-      <a href="./user.html" className="sign-in-button">
+      <Link to="user" className="sign-in-button">
         Sign In
-      </a>
+      </Link>
       {/* <button class="sign-in-button">Sign In</button> */}
     </form>
   );
