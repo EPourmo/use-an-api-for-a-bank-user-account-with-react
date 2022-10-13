@@ -37,7 +37,7 @@ export default function Form() {
         <input type="checkbox" id="remember-me" />
         <label htmlFor="remember-me">Remember me</label>
       </div>
-      <Link to="/user" className="sign-in-button">
+      <Link to="/profile" className="sign-in-button">
         Sign In
       </Link>
       {/* <button class="sign-in-button">Sign In</button> */}

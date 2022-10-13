@@ -1,7 +1,9 @@
 import argentBankLogo from "../assets/argentBankLogo.png";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 export default function Header({ isConnected }) {
+  const user = useSelector((state) => state.user);
   return (
     <nav className="main-nav">
       <Link className="main-nav-logo" to="/">
@@ -15,7 +17,7 @@ export default function Header({ isConnected }) {
       <div>
         <Link className="main-nav-item" to="/login">
           <i className="fa fa-user-circle"></i>
-          {isConnected ? "Tony" : "Sign In"}
+          {isConnected ? user.firstName : "Sign In"}
         </Link>
         {isConnected && (
           <Link className="main-nav-item" to="/">
