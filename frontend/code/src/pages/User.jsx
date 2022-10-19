@@ -1,5 +1,3 @@
-import Header from "../components/Header";
-import Footer from "../components/Footer";
 import Background from "../components/Background";
 import Account from "../components/Account";
 import Welcome from "../components/Welcome";
@@ -38,13 +36,11 @@ export default function User() {
   });
   return (
     <div className="userPage">
-      <Header isConnected={true} />
       <Background>
         <Welcome />
         <h2 className="sr-only">Accounts</h2>
         {accounts}
       </Background>
-      <Footer />
     </div>
   );
 }

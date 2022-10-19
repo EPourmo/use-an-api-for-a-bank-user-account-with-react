@@ -1,9 +1,20 @@
 import argentBankLogo from "../assets/argentBankLogo.png";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { getUserDetails } from "../features/user/userAction";
+import { logout } from "../features/user/userSlice";
 
-export default function Header({ isConnected }) {
-  const user = useSelector((state) => state.user);
+export default function Header() {
+  const { userInfo, userToken, success } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (success) {
+      dispatch(getUserDetails());
+    }
+  }, [success, dispatch]);
+
   return (
     <nav className="main-nav">
       <Link className="main-nav-logo" to="/">
@@ -15,16 +26,38 @@ export default function Header({ isConnected }) {
         <h1 className="sr-only">Argent Bank</h1>
       </Link>
       <div>
-        <Link className="main-nav-item" to="/login">
+        {userInfo ? (
+          <>
+            <Link className="main-nav-item" to="/profile">
+              <i className="fa fa-user-circle"></i>
+              {userInfo.firstName}
+            </Link>
+            <Link
+              className="main-nav-item"
+              to="/"
+              onClick={() => dispatch(logout())}
+            >
+              <i className="fa fa-sign-out"></i>
+              Sign Out
+            </Link>
+          </>
+        ) : (
+          <Link className="main-nav-item" to="/login">
+            <i className="fa fa-user-circle"></i>
+            Sign In
+          </Link>
+        )}
+
+        {/* <Link className="main-nav-item" to="/login">
           <i className="fa fa-user-circle"></i>
-          {isConnected ? user.firstName : "Sign In"}
+          {userInfo ? userInfo.firstName : "Sign In"}
         </Link>
-        {isConnected && (
+        {userInfo && (
           <Link className="main-nav-item" to="/">
             <i className="fa fa-sign-out"></i>
             Sign Out
           </Link>
-        )}
+        )} */}
       </div>
     </nav>
   );
