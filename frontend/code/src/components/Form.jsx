@@ -3,28 +3,52 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import { userLogin } from "../features/user/userAction";
+import { rememberMeFunc } from "../features/user/userSlice";
 import Error from "../components/Error";
 
 export default function Form() {
   // redux : get state data
-  const { loading, userInfo, userToken, error, success } = useSelector(
+  const { isConnected, rememberMe, userConnectID } = useSelector(
     (state) => state.user
   );
   // "connexion" with Redux
   const dispatch = useDispatch();
+
   // react form
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, watch } = useForm({
+    defaultValues: userConnectID
+      ? {
+          email: userConnectID.email,
+          password: userConnectID.password,
+        }
+      : null,
+  });
+  const formData = watch();
 
   const navigate = useNavigate();
 
+  const submitForm = (data) => {
+    dispatch(userLogin(data));
+  };
   // redirect authenticated user to profile screen
   useEffect(() => {
-    if (success) {
+    if (isConnected) {
       navigate("/profile");
+      dispatch(rememberMeFunc(formData));
     }
-  }, [navigate, userInfo]);
+  }, [navigate, isConnected]);
 
-  const submitForm = (data) => dispatch(userLogin(data));
+  useEffect(() => {
+    rememberMe
+      ? localStorage.setItem(
+          "userConnect",
+          JSON.stringify({
+            email: formData.email,
+            password: formData.password,
+          })
+        )
+      : localStorage.removeItem("userConnect");
+  }, [rememberMe]);
 
   return (
     <form onSubmit={handleSubmit(submitForm)}>
@@ -41,16 +65,9 @@ export default function Form() {
       </div>
 
       <div className="input-remember">
-        <input type="checkbox" id="remember-me" />
+        <input type="checkbox" id="remember-me" {...register("remembMe")} />
         <label htmlFor="remember-me">Remember me</label>
       </div>
-      {/* <Link
-        to="/profile"
-        className="sign-in-button"
-        onClick={() => dispatch(getInfo(user))}
-      >
-        Sign In
-      </Link> */}
       <button className="sign-in-button" type="submit">
         Sign In
       </button>

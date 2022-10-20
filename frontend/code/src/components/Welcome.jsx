@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 // import { changeUser } from "../redux";
 
 export default function Welcome() {
-  const { userInfo, success } = useSelector((state) => state.user);
+  const { userInfo, isConnected } = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
   const user = {
@@ -11,7 +11,7 @@ export default function Welcome() {
   };
   return (
     <div className="header">
-      {success && (
+      {userInfo && (
         <h1>
           Welcome back
           <br />

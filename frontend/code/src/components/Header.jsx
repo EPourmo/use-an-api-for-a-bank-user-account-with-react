@@ -6,14 +6,16 @@ import { getUserDetails } from "../features/user/userAction";
 import { logout } from "../features/user/userSlice";
 
 export default function Header() {
-  const { userInfo, userToken, success } = useSelector((state) => state.user);
+  const { userInfo, userToken, isConnected } = useSelector(
+    (state) => state.user
+  );
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (success) {
+    if (isConnected) {
       dispatch(getUserDetails());
     }
-  }, [success, dispatch]);
+  }, [isConnected, dispatch]);
 
   return (
     <nav className="main-nav">

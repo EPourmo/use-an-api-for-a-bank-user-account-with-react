@@ -6,25 +6,34 @@ const userToken = localStorage.getItem("userToken")
   ? localStorage.getItem("userToken")
   : null;
 
+const userConnectID = localStorage.getItem("userConnect")
+  ? JSON.parse(localStorage.getItem("userConnect"))
+  : null;
+
 const initialState = {
   loading: false,
   userInfo: null,
   userToken,
   error: null,
-  success: false,
+  isConnected: false,
+  userConnectID,
+  rememberMe: false,
 };
 
 const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
-    logout: (state) => {
+    logout: () => {
       localStorage.removeItem("userToken"); // deletes token from storage
       state.loading = false;
       state.userInfo = null;
       state.userToken = null;
       state.error = null;
-      state.success = false;
+      state.isConnected = false;
+    },
+    rememberMeFunc: (state, { payload }) => {
+      state.rememberMe = payload.remembMe;
     },
   },
   extraReducers: {
@@ -32,17 +41,15 @@ const userSlice = createSlice({
     [userLogin.pending]: (state) => {
       state.loading = true;
       state.error = null;
-      state.success = false;
     },
     [userLogin.fulfilled]: (state, { payload }) => {
       state.loading = false;
       state.userToken = payload.body.token;
-      state.success = true;
+      state.isConnected = true;
     },
     [userLogin.rejected]: (state, { payload }) => {
       state.loading = false;
       state.error = payload;
-      state.success = false;
     },
     // get user profile
     [getUserDetails.pending]: (state) => {
@@ -59,5 +66,5 @@ const userSlice = createSlice({
   },
 });
 
-export const { logout } = userSlice.actions;
+export const { logout, rememberMeFunc } = userSlice.actions;
 export default userSlice.reducer;

@@ -4,8 +4,8 @@ import { useSelector } from "react-redux";
 import { Link, Outlet } from "react-router-dom";
 
 const ProtectedRoute = () => {
-  const { userInfo } = useSelector((state) => state.user);
-  if (!userInfo) {
+  const { isConnected } = useSelector((state) => state.user);
+  if (!isConnected) {
     return (
       <div className="unauthorized">
         <h1>Unauthorized :(</h1>
