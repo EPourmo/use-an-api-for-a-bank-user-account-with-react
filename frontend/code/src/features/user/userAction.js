@@ -61,3 +61,31 @@ export const getUserDetails = createAsyncThunk(
     }
   }
 );
+
+export const postUserName = createAsyncThunk(
+  "user/newName",
+  async ({ firstName, lastName }, { getState, rejectWithValue }) => {
+    try {
+      // get user data from store
+      const { user } = getState();
+      // configure authorization header with user's token
+      const config = {
+        headers: {
+          Authorization: `Bearer ${user.userToken}`,
+        },
+      };
+      const { data } = await axios.put(
+        BASE_URL + "/user/profile",
+        { firstName, lastName },
+        config
+      );
+      return data;
+    } catch (error) {
+      if (error.response) {
+        return rejectWithValue(error.response.data.message);
+      } else {
+        return rejectWithValue(error.message);
+      }
+    }
+  }
+);

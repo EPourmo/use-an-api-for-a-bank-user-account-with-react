@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { userLogin, getUserDetails } from "./userAction";
+import { userLogin, getUserDetails, postUserName } from "./userAction";
 
 // initialize userToken from local storage
 const userToken = localStorage.getItem("userToken")
@@ -18,6 +18,7 @@ const initialState = {
   isConnected: false,
   userConnectID,
   rememberMe: false,
+  changeUserName: false,
 };
 
 const userSlice = createSlice({
@@ -34,6 +35,9 @@ const userSlice = createSlice({
     },
     rememberMeFunc: (state, { payload }) => {
       state.rememberMe = payload.remembMe;
+    },
+    changeUser: (state) => {
+      state.changeUserName = !state.changeUserName;
     },
   },
   extraReducers: {
@@ -63,8 +67,21 @@ const userSlice = createSlice({
       state.loading = false;
       state.error = payload;
     },
+    // put user name
+    [postUserName.pending]: (state) => {
+      state.loading = true;
+    },
+    [postUserName.fulfilled]: (state, { payload }) => {
+      state.loading = false;
+      state.userInfo = payload.body;
+      state.changeUserName = false;
+    },
+    [postUserName.rejected]: (state, { payload }) => {
+      state.loading = false;
+      state.error = payload;
+    },
   },
 });
 
-export const { logout, rememberMeFunc } = userSlice.actions;
+export const { logout, rememberMeFunc, changeUser } = userSlice.actions;
 export default userSlice.reducer;

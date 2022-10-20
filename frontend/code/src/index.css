@@ -298,3 +298,8 @@ body {
   flex-direction: column;
   min-height: 100vh;
 }
+
+.change-user-wrapper {
+  max-width: 50%;
+  margin: 0 auto;
+}
