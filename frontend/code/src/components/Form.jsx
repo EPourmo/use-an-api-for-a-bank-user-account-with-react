@@ -39,7 +39,7 @@ export default function Form() {
   }, [navigate, isConnected]);
 
   useEffect(() => {
-    rememberMe
+    rememberMe && isConnected
       ? localStorage.setItem(
           "userConnect",
           JSON.stringify({
@@ -63,7 +63,6 @@ export default function Form() {
           required
         />
       </div>
-
       <div className="input-remember">
         <input type="checkbox" id="remember-me" {...register("remembMe")} />
         <label htmlFor="remember-me">Remember me</label>
