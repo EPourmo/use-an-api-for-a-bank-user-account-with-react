@@ -8,7 +8,7 @@ export default function Welcome() {
 
   return (
     <div className="header">
-      <h1>Welcome back</h1>
+      <h1 className="welcome-back-msg">Welcome back</h1>
       {changeUserName ? <UserNameChangeForm /> : <UserNameWelcome />}
     </div>
   );

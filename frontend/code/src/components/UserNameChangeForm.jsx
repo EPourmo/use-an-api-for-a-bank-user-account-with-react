@@ -13,7 +13,7 @@ const UserNameChangeForm = () => {
   const dispatch = useDispatch();
 
   return (
-    <form onSubmit={handleSubmit(submitForm)}>
+    <form onSubmit={handleSubmit(submitForm)} className="change-user-form">
       <div className="change-user-wrapper">
         <div className="input-wrapper">
           <input
@@ -21,15 +21,26 @@ const UserNameChangeForm = () => {
             id="firstName"
             {...register("firstName")}
             required
+            placeholder="Tony"
+            className="change-user-fn"
           />
-          <input type="text" id="LastName" {...register("lastName")} required />
+        </div>
+        <div className="input-wrapper">
+          <input
+            type="text"
+            id="LastName"
+            {...register("lastName")}
+            required
+            placeholder="Jarvis"
+            className="change-user-ln"
+          />
         </div>
 
-        <button className="sign-in-button" type="submit">
+        <button className="sign-in-button save-btn" type="submit">
           Save
         </button>
         <button
-          className="sign-in-button"
+          className="sign-in-button cancel-btn"
           onClick={() => dispatch(changeUser())}
         >
           Cancel

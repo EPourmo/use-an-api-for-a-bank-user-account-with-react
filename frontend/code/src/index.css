@@ -13,6 +13,10 @@ body {
   min-height: 100vh;
 }
 
+button {
+  cursor: pointer;
+}
+
 .main {
   flex: 1;
 }
@@ -54,6 +58,10 @@ body {
 .main-nav-item {
   text-decoration: none;
   margin-right: 0.5rem;
+}
+
+.main-nav-item .fa-user-circle {
+  margin-right: 0.2rem;
 }
 
 .main-nav-item:hover {
@@ -296,10 +304,59 @@ body {
 .userPage {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  min-height: 85vh;
+}
+
+.user-name {
+  margin-top: 0;
+}
+
+.welcome-back-msg {
+  margin-bottom: 0;
+}
+
+.change-user-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2rem;
 }
 
 .change-user-wrapper {
-  max-width: 50%;
-  margin: 0 auto;
+  max-width: 600px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  justify-items: center;
+  align-items: center;
+  column-gap: 1rem;
+}
+
+.change-user-fn,
+.change-user-ln {
+  max-width: 180px;
+}
+
+.change-user-fn {
+  justify-self: end;
+}
+
+.input-wrapper input::placeholder {
+  opacity: 0.5;
+}
+
+.save-btn,
+.cancel-btn {
+  width: auto;
+  padding: 8px 30px;
+  margin-top: 0;
+}
+
+.save-btn {
+  justify-self: end;
+}
+
+.cancel-btn {
+  justify-self: start;
 }

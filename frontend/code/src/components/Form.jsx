@@ -55,6 +55,8 @@ export default function Form() {
       <div className="input-wrapper">
         <label htmlFor="username">Username</label>
         <input type="email" id="username" {...register("email")} required />
+      </div>
+      <div className="input-wrapper">
         <label htmlFor="password">Password</label>
         <input
           type="password"

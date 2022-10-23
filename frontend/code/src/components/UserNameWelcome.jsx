@@ -6,7 +6,9 @@ const UserNameWelcome = () => {
   const dispatch = useDispatch();
   return (
     <div>
-      {userInfo && <h1>{`${userInfo.firstName} ${userInfo.lastName} !`}</h1>}
+      {userInfo && (
+        <h1 className="user-name">{`${userInfo.firstName} ${userInfo.lastName}!`}</h1>
+      )}
       <button className="edit-button" onClick={() => dispatch(changeUser())}>
         Edit Name
       </button>
