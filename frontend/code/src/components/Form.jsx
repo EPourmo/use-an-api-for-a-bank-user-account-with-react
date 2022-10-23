@@ -8,7 +8,7 @@ import Error from "../components/Error";
 
 export default function Form() {
   // redux : get state data
-  const { isConnected, rememberMe, userConnectID } = useSelector(
+  const { isConnected, rememberMe, userConnectID, error } = useSelector(
     (state) => state.user
   );
   // "connexion" with Redux
@@ -69,6 +69,7 @@ export default function Form() {
         <input type="checkbox" id="remember-me" {...register("remembMe")} />
         <label htmlFor="remember-me">Remember me</label>
       </div>
+      {error && <p className="error-msg">{error}</p>}
       <button className="sign-in-button" type="submit">
         Sign In
       </button>

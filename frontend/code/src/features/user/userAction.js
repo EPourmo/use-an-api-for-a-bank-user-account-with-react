@@ -66,6 +66,12 @@ export const postUserName = createAsyncThunk(
   "user/newName",
   async ({ firstName, lastName }, { getState, rejectWithValue }) => {
     try {
+      // First letter should be Uppercase
+      const firstNameUppercase =
+        firstName.charAt(0).toUpperCase() + firstName.slice(1).toLowerCase();
+      const lastNameUppercase =
+        lastName.charAt(0).toUpperCase() + lastName.slice(1).toLowerCase();
+
       // get user data from store
       const { user } = getState();
       // configure authorization header with user's token
@@ -76,7 +82,7 @@ export const postUserName = createAsyncThunk(
       };
       const { data } = await axios.put(
         BASE_URL + "/user/profile",
-        { firstName, lastName },
+        { firstName: firstNameUppercase, lastName: lastNameUppercase },
         config
       );
       return data;

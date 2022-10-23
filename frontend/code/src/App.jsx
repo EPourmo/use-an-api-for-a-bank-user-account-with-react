@@ -7,6 +7,7 @@ import store from "./app/store";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import ProtectedRoute from "./routing/ProtectedRoute";
+import Error from "./components/Error";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
             <Route element={<ProtectedRoute />}>
               <Route path="/profile" element={<User />} />
             </Route>
+            <Route path="*" element={<Error />} />
           </Routes>
         </div>
         <Footer />

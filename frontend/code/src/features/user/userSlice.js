@@ -53,7 +53,11 @@ const userSlice = createSlice({
     },
     [userLogin.rejected]: (state, { payload }) => {
       state.loading = false;
-      state.error = payload;
+      if (payload === "Error: Password is invalid") {
+        state.error = "Le mot de passe est incorrect";
+      } else if (payload === "Error: User not found!") {
+        state.error = "L'email est invalide";
+      }
     },
     // get user profile
     [getUserDetails.pending]: (state) => {
