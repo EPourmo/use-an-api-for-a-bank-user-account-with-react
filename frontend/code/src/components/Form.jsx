@@ -20,6 +20,7 @@ export default function Form() {
       ? {
           email: userConnectID.email,
           password: userConnectID.password,
+          remembMe: true,
         }
       : null,
   });
