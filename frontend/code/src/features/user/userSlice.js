@@ -25,7 +25,7 @@ const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
-    logout: () => {
+    logout: (state) => {
       localStorage.removeItem("userToken"); // deletes token from storage
       state.loading = false;
       state.userInfo = null;
