@@ -110,7 +110,7 @@ paths:
           description: Invalid Fields
         "500":
           description: Internal Server Error
-  /user/transactions:
+  /user/transactions/{monthNumb}:
     post:
       security:
         - Bearer: []
@@ -122,6 +122,10 @@ paths:
         - in: header
           name: Authorization
           description: Attach Bearer JWT token
+          required: true
+        - in: path
+          name: monthNumb
+          description: month number of the requested transactions
           required: true
       produces:
         - application/json
@@ -168,14 +172,14 @@ paths:
           description: A transaction with the specified ID was not found.
         "500":
           description: Internal Server Error
-  /user/transactions/{idTransaction}/category:
+  /user/transactions/{idTransaction}/properties:
     put:
       security:
         - Bearer: []
       tags:
         - User Module
       summary: Update Transaction API
-      description: API for updating category of a specific transaction
+      description: API for updating properties (category or noted data) of a specific transaction
       parameters:
         - in: header
           name: Authorization
@@ -187,46 +191,15 @@ paths:
           required: true
         - in: body
           name: body
-          description: Update transation data
+          description: Update transation properties
           required: true
           schema:
-            $ref: "#/definitions/TransactionCategory"
+            $ref: "#/definitions/TransactionProperties"
       produces:
         - application/json
       responses:
         "200":
           description: transaction data added successfully
-          schema:
-            $ref: "#/definitions/Transaction"
-        "400":
-          description: Invalid Fields
-        "401":
-          description: Authorization information is missing or invalid.
-        "404":
-          description: A transaction with the specified ID was not found.
-        "500":
-          description: Internal Server Error
-    delete:
-      security:
-        - Bearer: []
-      tags:
-        - User Module
-      summary: Update Transaction API
-      description: API for deleting category of a specific transaction
-      parameters:
-        - in: header
-          name: Authorization
-          description: Attach Bearer JWT token
-          required: true
-        - in: path
-          name: idTransaction
-          description: id of the requested transaction
-          required: true
-      produces:
-        - application/json
-      responses:
-        "200":
-          description: transaction category data deleted successfully
           schema:
             $ref: "#/definitions/Transaction"
         "400":
@@ -311,30 +284,42 @@ definitions:
       id:
         type: string
         description: transaction id
+        example: "vkrpcerdpp1"
       date:
         type: string
+        format: date-time
         description: transaction date
+        example: "2022-06-20T09:12:28Z"
       description:
         type: string
         description: transaction description
+        example: "Golden Sun Bakery"
       amount:
         type: number
         description: transaction amount
+        example: 5
       balance:
         type: number
         description: account balance
+        example: 2082
       transactionType:
         type: string
         description: transaction type
+        example: "Electronic"
+      category:
+        type: string
+        description: transaction category
+        example: "food"
+      notes:
+        type: string
+        description: notes on transaction
+        example: "invoice added"
+  TransactionProperties:
+    type: object
+    properties:
       category:
         type: string
         description: transaction category
       notes:
         type: string
         description: notes on transaction
-  TransactionCategory:
-    type: object
-    properties:
-      category:
-        type: string
-        description: transaction category
