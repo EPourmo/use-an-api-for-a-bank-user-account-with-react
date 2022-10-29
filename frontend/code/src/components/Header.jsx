@@ -6,11 +6,10 @@ import { getUserDetails } from "../features/user/userAction";
 import { logout } from "../features/user/userSlice";
 
 export default function Header() {
-  const { userInfo, userToken, isConnected } = useSelector(
-    (state) => state.user
-  );
+  const { userInfo, isConnected } = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
+  // get data from API
   useEffect(() => {
     if (isConnected) {
       dispatch(getUserDetails());
@@ -49,17 +48,6 @@ export default function Header() {
             Sign In
           </Link>
         )}
-
-        {/* <Link className="main-nav-item" to="/login">
-          <i className="fa fa-user-circle"></i>
-          {userInfo ? userInfo.firstName : "Sign In"}
-        </Link>
-        {userInfo && (
-          <Link className="main-nav-item" to="/">
-            <i className="fa fa-sign-out"></i>
-            Sign Out
-          </Link>
-        )} */}
       </div>
     </nav>
   );

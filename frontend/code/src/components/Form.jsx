@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import { userLogin } from "../features/user/userAction";
 import { rememberMeFunc } from "../features/user/userSlice";
-import Error from "../components/Error";
 
 export default function Form() {
   // redux : get state data
@@ -28,6 +27,7 @@ export default function Form() {
 
   const navigate = useNavigate();
 
+  // gather data from form
   const submitForm = (data) => {
     dispatch(userLogin(data));
   };
@@ -39,6 +39,7 @@ export default function Form() {
     }
   }, [navigate, isConnected]);
 
+  // remember me : save user connexion id
   useEffect(() => {
     rememberMe && isConnected
       ? localStorage.setItem(

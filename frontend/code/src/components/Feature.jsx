@@ -1,3 +1,5 @@
+import PropTypes from "prop-types";
+
 export default function Feature(props) {
   const { image, alternativeText, title, description } = props;
   return (
@@ -8,3 +10,10 @@ export default function Feature(props) {
     </div>
   );
 }
+
+Feature.propTypes = {
+  image: PropTypes.string.isRequired,
+  alternativeText: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+};

@@ -3,6 +3,7 @@ import Account from "../components/Account";
 import Welcome from "../components/Welcome";
 
 export default function User() {
+  // data from design
   const accountData = [
     {
       id: 1,
@@ -24,6 +25,7 @@ export default function User() {
     },
   ];
 
+  // create component using reusable component
   const accounts = accountData.map((item) => {
     return (
       <Account

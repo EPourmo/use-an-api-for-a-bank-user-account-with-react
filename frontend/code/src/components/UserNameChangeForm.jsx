@@ -1,16 +1,15 @@
 import { useForm } from "react-hook-form";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { changeUser } from "../features/user/userSlice";
 import { postUserName } from "../features/user/userAction";
 
 const UserNameChangeForm = () => {
+  const dispatch = useDispatch();
   const { register, handleSubmit } = useForm();
+  // post user name via through API
   const submitForm = (data) => {
     dispatch(postUserName(data));
   };
-
-  const { userInfo, changeUserName } = useSelector((state) => state.user);
-  const dispatch = useDispatch();
 
   return (
     <form onSubmit={handleSubmit(submitForm)} className="change-user-form">

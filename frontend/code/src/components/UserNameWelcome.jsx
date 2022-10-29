@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { changeUser } from "../features/user/userSlice";
 
 const UserNameWelcome = () => {
-  const { userInfo, changeUserName } = useSelector((state) => state.user);
+  const { userInfo } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   return (
     <div>
