@@ -19,7 +19,7 @@ export default function Form() {
       ? {
           email: userConnectID.email,
           password: userConnectID.password,
-          remembMe: true,
+          remembMe: rememberMe,
         }
       : null,
   });
@@ -41,7 +41,7 @@ export default function Form() {
 
   // remember me : save user connexion id
   useEffect(() => {
-    rememberMe && isConnected
+    rememberMe
       ? localStorage.setItem(
           "userConnect",
           JSON.stringify({

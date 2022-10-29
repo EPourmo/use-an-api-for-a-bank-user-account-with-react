@@ -6,17 +6,13 @@ const userToken = localStorage.getItem("userToken")
   ? localStorage.getItem("userToken")
   : null;
 
-const userConnectID = localStorage.getItem("userConnect")
-  ? JSON.parse(localStorage.getItem("userConnect"))
-  : null;
-
 const initialState = {
   loading: false,
   userInfo: null,
   userToken,
   error: null,
   isConnected: false,
-  userConnectID,
+  userConnectID: null,
   rememberMe: false,
   changeUserName: false,
 };
@@ -32,6 +28,11 @@ const userSlice = createSlice({
       state.userToken = null;
       state.error = null;
       state.isConnected = false;
+      state.rememberMe
+        ? (state.userConnectID = JSON.parse(
+            localStorage.getItem("userConnect")
+          ))
+        : (state.userConnectID = null);
     },
     rememberMeFunc: (state, { payload }) => {
       state.rememberMe = payload.remembMe;
