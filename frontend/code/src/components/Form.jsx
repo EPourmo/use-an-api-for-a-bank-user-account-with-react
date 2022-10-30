@@ -23,6 +23,7 @@ export default function Form() {
         }
       : null,
   });
+  // watch data from react form
   const formData = watch();
 
   const navigate = useNavigate();

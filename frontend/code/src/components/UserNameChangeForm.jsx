@@ -6,7 +6,7 @@ import { postUserName } from "../features/user/userAction";
 const UserNameChangeForm = () => {
   const dispatch = useDispatch();
   const { register, handleSubmit } = useForm();
-  // post user name via through API
+  // post user name through API
   const submitForm = (data) => {
     dispatch(postUserName(data));
   };

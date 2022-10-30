@@ -1,11 +1,19 @@
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
+// url base to API
 const BASE_URL = "http://localhost:3001/api/v1";
 
+/**
+ * login API call
+ * @async
+ * @param {string} email
+ * @param {string} password
+ * @returns {Promise} response of the API
+ */
 export const userLogin = createAsyncThunk(
   "user/login",
-  async ({ email, password }, { rejectWithValue }) => {
+  async ({ email, password }) => {
     try {
       // configure header's Content-Type as JSON
       const config = {
@@ -13,7 +21,7 @@ export const userLogin = createAsyncThunk(
           "Content-Type": "application/json",
         },
       };
-
+      // axios fetching data
       const { data } = await axios.post(
         BASE_URL + "/user/login",
         {
@@ -29,18 +37,19 @@ export const userLogin = createAsyncThunk(
       return data;
     } catch (error) {
       // return custom error message from API if any
-      if (error.response) {
-        return rejectWithValue(error.response.data.message);
-      } else {
-        return rejectWithValue(error.message);
-      }
+      console.log(error.response.data.message);
     }
   }
 );
 
+/**
+ * user profile data API call
+ * @async
+ * @returns {Promise} response of the API
+ */
 export const getUserDetails = createAsyncThunk(
   "user/profile",
-  async (arg, { getState, rejectWithValue }) => {
+  async (arg, { getState }) => {
     try {
       // get user data from store
       const { user } = getState();
@@ -53,18 +62,22 @@ export const getUserDetails = createAsyncThunk(
       const { data } = await axios.post(BASE_URL + "/user/profile", {}, config);
       return data;
     } catch (error) {
-      if (error.response) {
-        return rejectWithValue(error.response.data.message);
-      } else {
-        return rejectWithValue(error.message);
-      }
+      // return custom error message from API if any
+      console.log(error.response.data.message);
     }
   }
 );
 
+/**
+ * change user name though API
+ * @async
+ * @param {string} firstName
+ * @param {string} lastName
+ * @returns {Promise} response of the API
+ */
 export const postUserName = createAsyncThunk(
   "user/newName",
-  async ({ firstName, lastName }, { getState, rejectWithValue }) => {
+  async ({ firstName, lastName }, { getState }) => {
     try {
       // First letter should be Uppercase
       const firstNameUppercase =
@@ -87,11 +100,8 @@ export const postUserName = createAsyncThunk(
       );
       return data;
     } catch (error) {
-      if (error.response) {
-        return rejectWithValue(error.response.data.message);
-      } else {
-        return rejectWithValue(error.message);
-      }
+      // return custom error message from API if any
+      console.log(error.response.data.message);
     }
   }
 );

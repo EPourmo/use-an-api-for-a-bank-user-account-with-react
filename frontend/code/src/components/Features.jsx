@@ -4,6 +4,7 @@ import iconMoney from "../assets/icon-money.png";
 import iconSecurity from "../assets/icon-security.png";
 
 export default function Features() {
+  // data from homepage
   const homepageData = [
     {
       id: 1,
@@ -31,6 +32,7 @@ export default function Features() {
     },
   ];
 
+  // create component using reusable component
   const featuresData = homepageData.map((item) => {
     return (
       <Feature
