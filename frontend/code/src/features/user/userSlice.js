@@ -6,6 +6,7 @@ const userToken = localStorage.getItem("userToken")
   ? localStorage.getItem("userToken")
   : null;
 
+// initial state of reduc
 const initialState = {
   loading: false,
   userInfo: null,
@@ -17,6 +18,7 @@ const initialState = {
   changeUserName: false,
 };
 
+// redux user slice
 const userSlice = createSlice({
   name: "user",
   initialState,
@@ -28,15 +30,18 @@ const userSlice = createSlice({
       state.userToken = null;
       state.error = null;
       state.isConnected = false;
+      // if REMEMEBER ME is checked, keep user id connexion from local storage
       state.rememberMe
         ? (state.userConnectID = JSON.parse(
             localStorage.getItem("userConnect")
           ))
         : (state.userConnectID = null);
     },
+    //  change REMEMBER ME if checked or unchecked
     rememberMeFunc: (state, { payload }) => {
       state.rememberMe = payload.remembMe;
     },
+    // manage change user form or welcome component
     changeUser: (state) => {
       state.changeUserName = !state.changeUserName;
     },
