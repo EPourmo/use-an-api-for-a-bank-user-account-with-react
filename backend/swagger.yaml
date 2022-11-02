@@ -111,7 +111,7 @@ paths:
         "500":
           description: Internal Server Error
   /user/transactions/{monthNumb}:
-    post:
+    get:
       security:
         - Bearer: []
       tags:
@@ -141,7 +141,7 @@ paths:
         "500":
           description: Internal Server Error
   /user/transactions/{idTransaction}:
-    post:
+    get:
       security:
         - Bearer: []
       tags:
@@ -173,13 +173,13 @@ paths:
         "500":
           description: Internal Server Error
   /user/transactions/{idTransaction}/properties:
-    put:
+    patch:
       security:
         - Bearer: []
       tags:
         - User Module
       summary: Update Transaction API
-      description: API for updating properties (category or noted data) of a specific transaction
+      description: API for updating properties (category or/and notes data) of a specific transaction
       parameters:
         - in: header
           name: Authorization
@@ -191,12 +191,12 @@ paths:
           required: true
         - in: body
           name: body
-          description: Update transation properties
+          description: Update transation propertie(s)
           required: true
           schema:
             $ref: "#/definitions/TransactionProperties"
       produces:
-        - application/json
+        - application/merge-patch+json
       responses:
         "200":
           description: transaction data added successfully
