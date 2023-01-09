@@ -78,7 +78,7 @@ or
 
 The data is accessible at `http://localhost:3001/` and you will now have two users in your MongoDB database.
 
-To access to the full API documentation please to [this repo](https://github.com/EPourmo/use-an-api-for-a-bank-user-account-with-react/tree/main/backend).
+To access to the full API documentation go to [this repo](https://github.com/EPourmo/use-an-api-for-a-bank-user-account-with-react/tree/main/backend).
 
 #### 2.1 Front End
 After running the back end, go to the front end folder 
